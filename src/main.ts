@@ -40,12 +40,15 @@ export async function run() {
         (core.getInput('stable') || 'true').toUpperCase() === 'TRUE';
       const checkLatest =
         (core.getInput('check-latest') || 'false').toUpperCase() === 'TRUE';
+      const debugBuild =
+        (core.getInput('debug-build') || 'false').toUpperCase() === 'TRUE';
       const nodejsInfo = {
         versionSpec: version,
         checkLatest,
         auth,
         stable,
-        arch
+        arch,
+        debugBuild
       };
       const nodeDistribution = getNodejsDistribution(nodejsInfo);
       await nodeDistribution.setupNodeJs();

@@ -4,6 +4,7 @@ export interface NodeInputs {
   auth?: string;
   checkLatest: boolean;
   stable: boolean;
+  debugBuild: boolean;
 }
 
 export interface INodeVersionInfo {

@@ -1,5 +1,6 @@
 import BaseDistribution from './base-distribution';
 import {NodeInputs} from './base-models';
+import DebugBuild from './debug/debug_builds';
 import NightlyNodejs from './nightly/nightly_builds';
 import OfficialBuilds from './official_builds/official_builds';
 import RcBuild from './rc/rc_builds';
@@ -17,7 +18,9 @@ export function getNodejsDistribution(
 ): BaseDistribution {
   const versionSpec = installerOptions.versionSpec;
   let distribution: BaseDistribution;
-  if (versionSpec.includes(Distributions.NIGHTLY)) {
+  if (installerOptions.debugBuild) {
+    distribution = new DebugBuild(installerOptions);
+  } else if (versionSpec.includes(Distributions.NIGHTLY)) {
     distribution = new NightlyNodejs(installerOptions);
   } else if (versionSpec.includes(Distributions.CANARY)) {
     distribution = new CanaryBuild(installerOptions);
